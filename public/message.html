@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="form">
+        <input type="text" id="name" placeholder="your name">
+        <input type="text" id="msg" placeholder="your message">
+        <button type="submit">Submit</button>
+    </form>
+    <!-- <script src="../node_modules/socket.io/client-dist/socket.io.js"></script> -->
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+        const form = document.querySelector("#form")
+        const name = document.querySelector("#name")
+        const message = document.querySelector("#msg")
+
+        const socket = io();
+    </script>
+</body>
+</html>

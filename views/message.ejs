@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="messages"></ul>
+    <form id="form">
+        <input type="text" id="name" placeholder="your name">
+        <input type="text" id="msg" placeholder="your message">
+        <button type="submit">Submit</button>
+    </form>
+    <!-- <script src="../node_modules/socket.io/client-dist/socket.io.js"></script> -->
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+        const messages = document.querySelector('#messages')
+        const form = document.querySelector("#form")
+        const name = document.querySelector("#name")
+        const msgInp = document.querySelector("#msg")
+        
+        const socket = io();
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            const message = { from : name.value.trim(), message: msgInp.value.trim()};
+            addMessageToList(message);
+            socket.emit('message', message)
+        })
+
+        socket.on('message', (data) => {
+            console.log(data);
+            addMessageToList(message);
+        })
+
+        const addMessageToList = (message) => {
+            const li = document.createElement('li');
+            li.innerHTML = `<strong>${message.from}: </strong>${message.message}`
+            messages.appendChild('li')
+        }
+    </script>
+</body>
+</html>
